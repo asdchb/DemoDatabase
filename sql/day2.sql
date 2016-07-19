@@ -103,7 +103,7 @@ SELECT *
 FROM db_test.employee
 WHERE ename = 'e1';
 
-CREATE INDEX ind_ip_location ON db_ip.ip (location);
+CREATE INDEX ind_ip_location ON db_ip.ip (min, max, location);
 
 
 SELECT *
@@ -112,6 +112,16 @@ WHERE location = '内蒙古 美国苹果公司[在美国Akamai科技公司(在�
 
 SHOW INDEX FROM db_ip.ip;
 DROP INDEX ind_ip_location ON db_ip.ip;
+
+
+INSERT INTO db_test.employee VALUE (NULL, 'tester', 'M', 30, 1);
+SELECT *
+FROM db_test.employee;
+
+INSERT INTO db_test.employee (ename, age) VALUE ('new tester5', 40);
+DESC db_test.employee;
+
+
 
 
 

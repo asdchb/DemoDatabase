@@ -7,7 +7,7 @@ SHOW TABLES;
 -- table employee
 DROP TABLE IF EXISTS db_test.employee;
 CREATE TABLE db_test.employee (
-  id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+  id           INT UNSIGNED
   COMMENT 'PK',
   ename        VARCHAR(255) COMMENT '姓名',
   gender       CHAR(1)      DEFAULT 'M'
@@ -25,7 +25,8 @@ INSERT INTO db_test.employee VALUES (NULL, 'e3', 'M', 61, NULL);
 INSERT INTO db_test.employee (id, ename, departmentId) VALUES (NULL, 'e4', 1);
 INSERT INTO db_test.employee (ename, departmentId) VALUES ('e5', 1);
 
-ALTER TABLE db_test.employee AUTO_INCREMENT = 10000000;
+ALTER TABLE db_test.employee
+  AUTO_INCREMENT = 10000000;
 
 DELETE FROM db_test.employee
 WHERE id = 12;
@@ -54,8 +55,40 @@ WHERE id = 1;
 -- FK
 ALTER TABLE db_test.employee
   ADD CONSTRAINT
+/*  fk_employee_departmentId*/
 FOREIGN KEY (departmentId)
 REFERENCES db_test.department (id)
   ON DELETE CASCADE; -- cascading style sheet CSS
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+ALTER TABLE db_test.new_employee RENAME db_test.employee;
+
+SHOW TABLES ;
+
+ALTER TABLE db_test.department
+    ADD tel VARCHAR(20);
+
+ALTER TABLE db_test.department
+    DROP COLUMN tel;
+
+ALTER TABLE db_test.department
+  MODIFY COLUMN dname VARCHAR(20);
+
+ALTER TABLE db_test.employee
+  ADD CONSTRAINT
+  pk_employee_id
+PRIMARY KEY (id);
+
+ALTER TABLE db_test.employee
+  MODIFY COLUMN id INT UNSIGNED AUTO_INCREMENT;
+
+ALTER TABLE db_test.employee
+  CHANGE gender sex CHAR(1);
+
+DESC db_test.employee;
+DESC db_test.department; -- DESCribe
+
+
+
+

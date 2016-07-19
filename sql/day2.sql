@@ -10,14 +10,22 @@ CREATE TABLE db_test.employee (
   id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK',
   ename        VARCHAR(255) COMMENT '姓名',
+  gender       CHAR(1)      DEFAULT 'M'
+  COMMENT '性别',
+  age          INT,
   departmentId INT UNSIGNED COMMENT '部门编号 FK' -- ,
   #   FOREIGN KEY (departmentId) REFERENCES db_test.department (id)
 )
   COMMENT '员工表';
 
-INSERT INTO db_test.employee VALUES (NULL, 'e1', 1);
-INSERT INTO db_test.employee VALUES (NULL, 'e2', 2);
-INSERT INTO db_test.employee VALUES (NULL, 'e3', NULL);
+INSERT INTO db_test.employee VALUES (NULL, 'e1', 'M', 18, 1);
+INSERT INTO db_test.employee VALUES (NULL, 'e2', 'F', 17, 2);
+INSERT INTO db_test.employee VALUES (NULL, 'e3', 'M', 61, NULL);
+
+INSERT INTO db_test.employee (id, ename, departmentId) VALUES (NULL, 'e4', 1);
+INSERT INTO db_test.employee (ename, departmentId) VALUES ('e5', 1);
+
+ALTER TABLE db_test.employee AUTO_INCREMENT = 10000000;
 
 DELETE FROM db_test.employee
 WHERE id = 12;

@@ -114,12 +114,34 @@ SHOW INDEX FROM db_ip.ip;
 DROP INDEX ind_ip_location ON db_ip.ip;
 
 
-INSERT INTO db_test.employee VALUE (NULL, 'tester', 'M', 30, 1);
+INSERT INTO db_test.employee VALUE (NULL, 'tester1', 'M', 30, 1);
+
 SELECT *
 FROM db_test.employee;
 
 INSERT INTO db_test.employee (ename, age) VALUE ('new tester5', 40);
 DESC db_test.employee;
+
+UPDATE db_test.employee
+SET gender = 'M'
+WHERE id = 1;
+
+UPDATE db_test.employee
+SET ename = 'zhangsan', age = 18
+WHERE id = 1;
+
+DELETE FROM db_test.employee
+WHERE gender = 'M';
+
+SHOW TABLE STATUS FROM db_test;
+
+SHOW FULL COLUMNS FROM db_test.employee;
+
+SHOW VARIABLES LIKE 'char%';
+SHOW VARIABLES LIKE 'coll%';
+SHOW VARIABLES;
+
+SHOW CREATE TABLE db_test.employee;
 
 
 

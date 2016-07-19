@@ -7,9 +7,10 @@ SHOW TABLES;
 -- table employee
 DROP TABLE IF EXISTS db_test.employee;
 CREATE TABLE db_test.employee (
-  id           INT UNSIGNED
+  id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK',
-  ename        VARCHAR(255) COMMENT '姓名',
+  ename        VARCHAR(255) UNIQUE
+  COMMENT '姓名',
   gender       CHAR(1)      DEFAULT 'M'
   COMMENT '性别',
   age          INT,
@@ -55,22 +56,23 @@ WHERE id = 1;
 -- FK
 ALTER TABLE db_test.employee
   ADD CONSTRAINT
-/*  fk_employee_departmentId*/
+  /*  fk_employee_departmentId*/
 FOREIGN KEY (departmentId)
 REFERENCES db_test.department (id)
   ON DELETE CASCADE; -- cascading style sheet CSS
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-ALTER TABLE db_test.new_employee RENAME db_test.employee;
+ALTER TABLE db_test.new_employee
+  RENAME db_test.employee;
 
-SHOW TABLES ;
-
-ALTER TABLE db_test.department
-    ADD tel VARCHAR(20);
+SHOW TABLES;
 
 ALTER TABLE db_test.department
-    DROP COLUMN tel;
+  ADD tel VARCHAR(20);
+
+ALTER TABLE db_test.department
+  DROP COLUMN tel;
 
 ALTER TABLE db_test.department
   MODIFY COLUMN dname VARCHAR(20);
@@ -88,6 +90,28 @@ ALTER TABLE db_test.employee
 
 DESC db_test.employee;
 DESC db_test.department; -- DESCribe
+
+
+SHOW TABLES;
+
+CREATE INDEX ind_employee_ename ON db_test.employee (age);
+DROP INDEX ind_employee_ename ON db_test.employee;
+SHOW INDEX FROM db_test.employee;
+
+
+SELECT *
+FROM db_test.employee
+WHERE ename = 'e1';
+
+CREATE INDEX ind_ip_location ON db_ip.ip (location);
+
+
+SELECT *
+FROM db_ip.ip
+WHERE location = '内蒙古 美国苹果公司[在美国Akamai科技公司(在北京蓝汛通信技术有限公司在呼和浩特联通IDC机房)]的HTTPSCDN节点';
+
+SHOW INDEX FROM db_ip.ip;
+DROP INDEX ind_ip_location ON db_ip.ip;
 
 
 

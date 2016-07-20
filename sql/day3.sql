@@ -36,3 +36,33 @@ WHERE cust_id = '1000000001';
 
 DESC db_sample.customers;
 
+SELECT *
+FROM db_sample.products
+WHERE prod_name LIKE '%teddy%';
+
+USE scott;
+
+SHOW TABLES;
+
+DESC scott.emp;
+DESC scott.dept;
+
+SELECT *
+FROM scott.salgrade;
+
+SELECT *
+FROM scott.emp
+WHERE ENAME LIKE '_A%';
+
+SELECT *
+FROM scott.emp
+WHERE ENAME REGEXP '^[A-z]{1}A.*$';
+
+SELECT
+  ENAME,
+  SAL,
+  COMM,
+  SAL + ifnull(COMM, 0)
+FROM scott.emp;
+
+

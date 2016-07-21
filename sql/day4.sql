@@ -58,8 +58,41 @@ SELECT
   d.deptno,
   d.DNAME
 FROM scott.dept d
+  LEFT OUTER JOIN scott.emp e
+    ON e.DEPTNO = d.DEPTNO
+
+UNION /*ALL*/
+
+SELECT
+  e.ENAME,
+  e.DEPTNO,
+  d.deptno,
+  d.DNAME
+FROM scott.dept d
   RIGHT OUTER JOIN scott.emp e
     ON e.DEPTNO = d.DEPTNO;
 
 USE db_sample;
-SHOW TABLES ;
+SHOW TABLES;
+
+SELECT *
+FROM scott.emp;
+
+SELECT *
+FROM scott.emp
+# WHERE DEPTNO = 10 OR DEPTNO = 30;
+WHERE DEPTNO IN (10, 30);
+
+
+SELECT *
+FROM scott.emp
+WHERE DEPTNO = 10
+UNION
+SELECT *
+FROM scott.emp
+WHERE DEPTNO = 30;
+
+# oracle
+# union
+# intersect
+# minus

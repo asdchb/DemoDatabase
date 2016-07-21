@@ -96,3 +96,34 @@ WHERE DEPTNO = 30;
 # union
 # intersect
 # minus
+
+CREATE TABLE scott.emp_backup
+  SELECT *
+  FROM scott.emp;
+
+USE scott;
+
+SHOW TABLES;
+
+SELECT *
+FROM scott.emp_backup;
+
+CREATE TABLE scott.emp_test
+  SELECT
+    ENAME,
+    JOB,
+    HIREDATE
+  FROM scott.emp;
+
+DESC scott.emp_backup;
+DESC scott.emp;
+
+SELECT *
+FROM scott.emp_test;
+TRUNCATE TABLE scott.emp_test;
+
+INSERT INTO scott.emp_test (ENAME, JOB)
+  SELECT
+    ENAME,
+    JOB
+  FROM scott.emp;

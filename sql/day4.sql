@@ -127,3 +127,58 @@ INSERT INTO scott.emp_test (ENAME, JOB)
     ENAME,
     JOB
   FROM scott.emp;
+
+SELECT
+  c.cust_name,
+  c.cust_contact
+FROM db_sample.customers c, db_sample.orders o, db_sample.orderitems oi
+WHERE c.cust_id = o.cust_id AND o.order_num = oi.order_num AND oi.prod_id = 'rgan01';
+
+SELECT
+  #   DISTINCT
+  c.cust_name,
+  c.cust_contact
+FROM db_sample.customers c INNER JOIN db_sample.orders o
+  INNER JOIN db_sample.orderitems oi
+    ON c.cust_id = o.cust_id AND o.order_num = oi.order_num
+WHERE oi.prod_id = 'rgan01';
+
+DROP VIEW Products_Customers;
+CREATE VIEW Products_Customers
+AS
+  SELECT
+    c.cust_name,
+    c.cust_contact,
+    oi.prod_id
+  FROM db_sample.customers c INNER JOIN db_sample.orders o
+    INNER JOIN db_sample.orderitems oi
+      ON c.cust_id = o.cust_id AND o.order_num = oi.order_num;
+
+USE db_sample;
+
+SHOW TABLES;
+
+SELECT
+  cust_name,
+  cust_contact
+FROM products_customers
+WHERE prod_id = 'rgan01';
+
+CREATE TABLE t_products_customers
+  SELECT
+    c.cust_name,
+    c.cust_contact,
+    oi.prod_id
+  FROM db_sample.customers c INNER JOIN db_sample.orders o
+    INNER JOIN db_sample.orderitems oi
+      ON c.cust_id = o.cust_id AND o.order_num = oi.order_num;
+
+SELECT DISTINCT cust_name, cust_contact
+FROM t_products_customers;
+
+SELECT DISTINCT cust_name, cust_contact
+FROM products_customers;
+
+UPDATE customers
+SET cust_name = 'zhangsan'
+WHERE cust_name = 'Village Toys';

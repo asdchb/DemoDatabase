@@ -66,3 +66,13 @@ SELECT
 FROM scott.emp;
 
 
+CREATE INDEX ind_location ON db_ip.ip (location);
+DROP INDEX ind_location ON db_ip.ip;
+
+SELECT DISTINCT (location)
+FROM db_ip.ip
+WHERE location NOT REGEXP '^IANA.*' AND location NOT REGEXP 'cz88'
+ORDER BY location;
+
+
+
